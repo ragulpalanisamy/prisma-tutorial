@@ -14,6 +14,7 @@ datasource db {
 model User {
   id         Int      @id @default(autoincrement())
   name       String
+  age Int
   email      String   @unique
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
@@ -21,6 +22,11 @@ model User {
   perference Json
   //writternPosts  post[] @relation("WritternPosts")
   //favoritePosts  Post[] @relation("FavoritePosts")
+
+//block-level attribute 
+  @@unique([name,age])
+  @@index([email])
+
 }
 
 //single
@@ -35,8 +41,8 @@ model perference {
 model post {
   id         Int        @id @default(autoincrement())
   rating     Decimal
-  createdAt  DateTime
-  updatedAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
   //author    User     @relation("WritternPosts",fields: [autherId], references: [id])
   //authorId    String
   //favortiePosts    User?     @relation("FavoritePosts",fields: [favoriteById], references: [id])
@@ -48,4 +54,9 @@ model post {
 model Category {
   id    String @id @default(uuid())
   Posts post[]
+}
+
+enum Role {
+  BASIC
+  ADMIN
 }
