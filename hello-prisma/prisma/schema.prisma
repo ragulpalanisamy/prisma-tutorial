@@ -12,37 +12,37 @@ datasource db {
 
 //user model
 model User {
-  id         Int      @id @default(autoincrement())
-  name       String
-  age Int
-  email      String   @unique
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  isAdmin    Boolean
-  perference Json
+  id               Int             @id @default(autoincrement())
+  name             String
+  age              Int
+  email            String          @unique
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+  isAdmin          Boolean
+  perference       Json
+  userPreference   UserPreference? @relation(fields: [userPerferenceId], references: [id])
+  userPerferenceId String?         @unique
   //writternPosts  post[] @relation("WritternPosts")
   //favoritePosts  Post[] @relation("FavoritePosts")
 
-//block-level attribute 
-  @@unique([name,age])
+  //block-level attribute 
+  @@unique([name, age])
   @@index([email])
-
 }
 
 //single
-model perference {
+model UserPreference {
   id            String  @id @default(uuid())
   emailUpadates Boolean
-  //user User @relation(fields: [userId], references: [id])
-  //userId String
+  user          User?
 }
 
 //posts model
 model post {
   id         Int        @id @default(autoincrement())
   rating     Decimal
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
   //author    User     @relation("WritternPosts",fields: [autherId], references: [id])
   //authorId    String
   //favortiePosts    User?     @relation("FavoritePosts",fields: [favoriteById], references: [id])
