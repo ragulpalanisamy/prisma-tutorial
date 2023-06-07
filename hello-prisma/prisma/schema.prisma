@@ -33,7 +33,7 @@ model User {
 //single
 model UserPreference {
   id            String  @id @default(uuid())
-  emailUpadates Boolean
+  emailUpdates Boolean
   user          User?
 }
 

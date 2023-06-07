@@ -28,23 +28,23 @@ async function main(){
     } */
 // find 
 
- const user = await prisma.user.findMany({
+ /* const user = await prisma.user.findMany({
     where: {
         //single User
         /* email: 'kyle@test.com',
         name_age:{
             age: 21,
             name: 'Kyle',
-        } */
+        } 
 
         //many user
-       name: {notIn: "Sally"},
+       name: {not: "Sally"},
        //email: {contains: "@test.com"}
        age: { gt: 23}
     },
     /* orderBy: {
         age: "desc",
-    }, */
+    }, 
     //distinct: ["name","age"],
     //take: 2,
     //skip: 1,
@@ -52,8 +52,28 @@ async function main(){
 console.log(user);
 
 }
+ */
 
-
+//update
+/* 
+const user = await prisma.user.update({
+    where: {
+        email: "kyle@test.com",
+    },
+    data: {
+        userPreference: {
+            create: {
+                emailUpadates: true
+            }
+        }
+    },
+})
+console.log(user);
+ */
+//
+//delete
+await prisma.user.deleteMany()
+}
 main()
     .catch(e =>{
         console.error("error", e);
